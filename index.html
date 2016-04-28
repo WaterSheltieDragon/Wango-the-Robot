@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Wango Control Panel</title>
+<link rel="stylesheet" href="css/reset.css" />
+<link rel="stylesheet" href="css/text.css" />
+<link rel="stylesheet" href="css/960.css" />
+<style> 
+.button {
+    outline: 2px solid #a1a1a1;
+    padding: 17px 0px 0px 0px; 
+    background: #dddddd;
+    width: 50px;
+    #border-radius: 5px;
+    text-align: center;
+}
+h1,h2 { margin-bottom: 2px; }
+.p1 { background: #b3e6ff; }
+.p2 { background: #ffffb3; }
+</style>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquerymobile/1.4.5/jquery.mobile.min.js"></script>
+
+<script>
+
+$(document).ready(function () {
+
+  $("#driveleft").on("tap",function() {
+    $.get("wango.php?cmd=left");
+    $("#driveleft").css("background", "red");
+    setInterval(function(){
+      $("#driveleft").css("background","#dddddd");
+    },100);
+    $("#myimg").attr("src", "/image.jpg?"+new Date().getTime());
+  });
+
+  $("#nudgeleft").on("tap",function() {
+    $.get("wango.php?cmd=nudgeleft");
+    $("#nudgeleft").css("background", "red");
+    setInterval(function(){
+      $("#nudgeleft").css("background","#dddddd");
+    },100);
+    $("#myimg").attr("src", "/image.jpg?"+new Date().getTime());
+  });
+
+  $("#driveright").on("tap",function() {
+    $.get("wango.php?cmd=right");
+    $("#driveright").css("background", "red");
+    setInterval(function(){
+      $("#driveright").css("background","#dddddd");
+    },100);
+    $("#myimg").attr("src", "/image.jpg?"+new Date().getTime());
+  });
+ 
+  $("#nudgeright").on("tap",function() {
+    $.get("wango.php?cmd=nudgeright");
+    $("#nudgeright").css("background", "red");
+    setInterval(function(){
+      $("#nudgeright").css("background","#dddddd");
+    },100);
+    $("#myimg").attr("src", "/image.jpg?"+new Date().getTime());
+
+  });
+
+  $("#driveforward").on("tap",function() {
+    $.get("wango.php?cmd=forward");
+    $("#driveforward").css("background", "red");
+    setInterval(function(){
+      $("#driveforward").css("background","#dddddd");
+    },100);
+    $("#myimg").attr("src", "/image.jpg?"+new Date().getTime());
+  });
+
+  $("#driveback").on("tap",function() {
+    $.get("wango.php?cmd=back");
+    $("#driveback").css("background", "red");
+    setInterval(function(){
+      $("#driveback").css("background","#dddddd");
+    },100);
+    $("#myimg").attr("src", "/image.jpg?"+new Date().getTime());
+  });
+
+  $("#snap").on("tap",function() {
+    $.get("wango.php?cmd=snap");
+    $("#snap").css("background", "red");
+    setInterval(function(){
+      $("#snap").css("background","#dddddd");
+    },100);
+  });
+
+  $("#startcam").on("tap",function() {
+    $.get("wango.php?cmd=startcam");
+    $("#startcam").css("background", "red");
+    setInterval(function(){
+      $("#startcam").css("background","#dddddd");
+    },100);
+  });
+
+  $("#stopcam").on("tap",function() {
+    $.get("wango.php?cmd=stopcam");
+    $("#stopcam").css("background", "red");
+    setInterval(function(){
+      $("#stopcam").css("background","#dddddd");
+    },100);
+  });
+
+  $("#resetcam").on("tap",function() {
+    $.get("wango.php?cmd=resetcam");
+    $("#resetcam").css("background", "red");
+    setInterval(function(){
+      $("#resetcam").css("background","#dddddd");
+    },100);
+
+  });
+
+  $("#shutdown").on("tap",function() {
+    $.get("wango.php?cmd=shutdown");
+    $("#shutdown").css("background", "red");
+    setInterval(function(){
+      $("#shutdown").css("background","#dddddd");
+    },100);
+
+  });
+
+  $("#up").on("tap",function() {
+    $.get("wango.php?cmd=up");
+    $("#up").css("background", "red");
+    setInterval(function(){
+      $("#up").css("background","#dddddd");
+    },100);
+  });
+
+  $("#down").on("tap",function() {
+    $.get("wango.php?cmd=down");
+    $("#down").css("background", "red");
+    setInterval(function(){
+      $("#down").css("background","#dddddd");
+    },100);
+  });
+
+  $("#headleft").on("tap",function() {
+    $.get("wango.php?cmd=headleft");
+    $("#headleft").css("background", "red");
+    setInterval(function(){
+      $("#headleft").css("background","#dddddd");
+    },100);
+  });
+
+  $("#headright").on("tap",function() {
+    $.get("wango.php?cmd=headright");
+    $("#headright").css("background", "red");
+    setInterval(function(){
+      $("#headright").css("background","#dddddd");
+    },100);
+  });
+
+  $("#headleftnudge").on("tap",function() {
+    $.get("wango.php?cmd=headleftnudge");
+    $("#headleftnudge").css("background", "red");
+    setInterval(function(){
+      $("#headleftnudge").css("background","#dddddd");
+    },100);
+  });
+
+  $("#headrightnudge").on("tap",function() {
+    $.get("wango.php?cmd=headrightnudge");
+    $("#headrightnudge").css("background", "red");
+    setInterval(function(){
+      $("#headrightnudge").css("background","#dddddd");
+    },100);
+  });
+
+  $("#faceon").on("tap",function() {
+    $.get("wango.php?cmd=faceon");
+    $("#faceon").css("background", "red");
+    setInterval(function(){
+      $("#faceon").css("background","#dddddd");
+    },100);
+  });
+
+  $("#reboot").on("tap",function() {
+    $.get("wango.php?cmd=reboot");
+    $("#reboot").css("background", "red");
+    setInterval(function(){
+      $("#reboot").css("background","#dddddd");
+    },100);
+  });
+
+  $("#faceoff").on("tap",function() {
+    $.get("wango.php?cmd=faceoff");
+    $("#faceoff").css("background", "red");
+    setInterval(function(){
+      $("#faceoff").css("background","#dddddd");
+    },100);
+  });
+
+  $("#run").on("tap",function() {
+    $.get("wango.php?cmd=run");
+    $("#run").css("background", "red");
+    setInterval(function(){
+      $("#run").css("background","#dddddd");
+    },100);
+  });
+
+  $("#stop").on("tap",function() {
+    $.get("wango.php?cmd=stop");
+    $("#stop").css("background", "red");
+    setInterval(function(){
+      $("#stop").css("background","#dddddd");
+    },100);
+  });
+
+
+  setInterval(function(){
+    $("#myimg").attr("src", "/image.jpg?"+new Date().getTime());
+  },1000);
+
+});
+</script>
+
+</head>
+<body>
+<h1>Wango Control Panel</h1>
+<div class="container_12">
+  <div class="grid_6 p1"><h2>Drive Control</h2>
+  </div>
+  <div class="grid_6 p1"><h2>Head Control</h2>
+  </div>
+  <div class="clear"></div>
+  <div class="grid_2"><p></p></div>
+  <div class="grid_1 button" id="driveforward"><p>forward</p></div>
+  <div class="grid_1 button" id="run"><p>run</p></div>
+  <div class="grid_2"><p></p></div>
+  <div class="grid_2"><p></p></div>
+  <div class="grid_2 button" id="up">
+    <p>up</p>
+  </div>
+  <div class="grid_2"><p></p></div>
+  <div class="clear"></div>
+  <div class="grid_1 button" id="nudgeleft">
+    <p>nudge</p>
+  </div>
+  <div class="grid_1 button" id="driveleft">
+    <p>left</p>
+  </div>
+  <div class="grid_2 button" id="stop"><p>stop</p></div>
+  <div class="grid_1 button" id="driveright">
+    <p>right</p>
+  </div>
+  <div class="grid_1 button" id="nudgeright">
+    <p>nudge</p>
+  </div>
+  <div class="grid_1 button" id="headleftnudge">
+    <p>nudge</p>
+  </div>
+  <div class="grid_1 button" id="headleft">
+    <p>left</p>
+  </div>
+  <div class="grid_2"><p></p></div>
+  <div class="grid_1 button" id="headright">
+    <p>right</p>
+  </div>
+  <div class="grid_1 button" id="headrightnudge">
+    <p>nudge</p>
+  </div>
+  <div class="clear"></div>
+  <div class="grid_2"><p> </p></div>
+  <div class="grid_2 button" id="driveback">
+    <p>back</p>
+  </div>
+  <div class="grid_4"><p></p></div>
+  <div class="grid_2 button" id="down">
+    <p>down</p>
+  </div>
+  <div class="clear"></div>
+  <div class="grid_6"><p></p></div>
+  <div class="grid_2 button" id="faceon">
+    <p>follow faces</p>
+  </div>
+  <div class="grid_2"><p></p></div>
+  <div class="grid_2 button" id="faceoff">
+    <p>ignore faces</p>
+  </div>
+  <div class="clear"></div>
+
+<h2 class="p1">Camera</h2>
+  <div class="grid_2 button" id="snap">
+    <p>
+      snap
+    </p>
+  </div>
+  <div class="grid_2 button" id="startcam">
+    <p>
+      start cam
+    </p>
+  </div>
+  <div class="grid_2 button" id="stopcam">
+    <p>
+      stop cam
+    </p>
+  </div>
+  <div class="grid_2">
+    <p>
+    <img src="image.jpg" id="myimg" width="320" height="240">
+    </p>
+  </div>
+  <div class="clear"></div>
+  <div class="grid_2 button" id="resetcam">
+    <p>
+      reset cam
+    </p>
+  </div>
+  <div class="clear"></div> 
+
+  <h2 class="p1">Shutdown</h2>
+  <div class="grid_2 button" id="shutdown">
+    <p>
+      Shutdown
+    </p>
+  </div>
+  <div class="grid_2 button" id="reboot">
+    <p>
+      Reboot
+    </p>
+  </div>
+  <div class="clear"></div>
+<br/>
+<br/>
+
+
+
+</div>
+</body>

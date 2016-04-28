@@ -1,0 +1,7 @@
+#!/bin/bash
+
+bs=`lsusb | grep Webcam | cut -c5-7`
+dve=`lsusb | grep Webcam | cut -c16-18`
+
+sudo /var/www/html/usbreset /dev/bus/usb/$bs/$dve
+
