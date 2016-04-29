@@ -177,6 +177,7 @@ def CamUp(distance, speed):			# Same logic as above
 #============================================================================================================
 
 done = False
+cnt = 0
 while not done:
 
 	faceFound = False	# This variable is set to true if, on THIS loop a face has already been found
@@ -192,25 +193,19 @@ while not done:
 			Servo1DP.close()
 			Servo0S.close()
 			Servo1S.close()
-			print "2"
 			p_p0.terminate()
 			time.sleep(0.1)
 			p_p1.terminate()
 			time.sleep(0.1)
 			p_p0.join()
 			p_p1.join()
-			print "2.1"
 			webcam.release()
-			print "3"
 			servo.close()
-			print "4"
 		finally:
 			print "5"
 
-		print "5.1"
 		exit()
 		done = True
-		print "6"
 
 	if not faceFound:
 		if lastface == 0 or lastface == 1:
@@ -263,40 +258,44 @@ while not done:
 	x,y,w,h = face
 	Cface = [(w/2+x),(h/2+y)]	# we are given an x,y corner point and a width and height, we need the center
 
+	img_out = aframe.copy()
+
 	if Cface[0] != 0:		# if the Center of the face is not zero (meaning no face was found)
 
-		img_out = aframe.copy()
  		draw_rect(img_out,face,(0,255,0))
-		cv2.imwrite("/var/www/html/image.jpg",img_out)
 
                 print str(Cface[0]) + "," + str(Cface[1])
 
-		if Cface[0] > 180:	# The camera is moved diffrent distances and speeds depending on how far away-
-			CamLeft(50,1)	#	from the center of that axis it detects a face
-		if Cface[0] > 190:	#
+		if Cface[0] > 200:	# The camera is moved diffrent distances and speeds depending on how far away-
+			CamLeft(200,3)	#	from the center of that axis it detects a face
+		elif Cface[0] > 190:	#
 			CamLeft(100,2)	#
-		if Cface[0] > 200:	#
-			CamLeft(200,3)	#
+		elif Cface[0] > 180:	#
+			CamLeft(50,1)	#
 
-		if Cface[0] < 140:	# and diffrent dirrections depending on what side of center if finds a face.
-			CamRight(50,1)
-		if Cface[0] < 130:
-			CamRight(100,2)
-		if Cface[0] < 120:
+		if Cface[0] < 120:	# and diffrent dirrections depending on what side of center if finds a face.
 			CamRight(200,3)
+		elif Cface[0] < 130:
+			CamRight(100,2)
+		elif Cface[0] < 140:
+			CamRight(50,1)
 
-		if Cface[1] > 160:	# and moves diffrent servos depending on what axis we are talking about.
-			CamUp(400,1)
+		if Cface[1] > 170:	# and moves diffrent servos depending on what axis we are talking about.
+			CamUp(300,1)
 		elif Cface[1] > 150:
 			CamUp(300,2)
 		elif Cface[1] > 140:
 			CamUp(200,3)
 
 		if Cface[1] < 80:
-			CamDown(400,1)
+			CamDown(400,3)
 		elif Cface[1] < 90:
 			CamDown(300,2)
-		elif Cface[1] < 100:
-			CamDown(200,3)
+		elif Cface[1] < 110:
+			CamDown(200,1)
 
+	cnt = cnt + 1
+	if cnt == 10:
+		cnt = 0
+		cv2.imwrite("/var/www/html/image.jpg",img_out)
 
