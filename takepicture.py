@@ -1,3 +1,7 @@
+# Wango The Robot
+#
+# this file takes continous pictures as long as face detection is not running.
+# face detection and this process are exclusive.
 import time
 import cv2
 import os.path
@@ -9,9 +13,9 @@ done = False
 
 if __name__ == '__main__':
 
-	webcam = cv2.VideoCapture(-1)                           # Get ready to start getting images from the webcam
-	webcam.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 320)         # I have found this to be about the highest-
-	webcam.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 240)        #       resolution you'll want to attempt on the pi
+	webcam = cv2.VideoCapture(-1)
+	webcam.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 320)
+	webcam.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 240)
 
 while not done:
 
@@ -23,5 +27,3 @@ while not done:
 	aframe = webcam.read()[1]
 	cv2.imwrite("/mnt/ramdisk/image.jpg",aframe)
 	time.sleep(0.1)
-	print "a"
-
