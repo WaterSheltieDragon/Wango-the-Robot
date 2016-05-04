@@ -18,11 +18,11 @@ try:
   f = open('/etc/ramdisk/cmd2.txt', 'r+')
   cmd = f.readline()
 
-  if cmd == "up":
+  if cmd == "down":
     x = servo.getPosition(1) - 800
     servo.setTarget(1,x)
-  elif cmd == "down":
-    x = servo.getPosition(1) - 800
+  elif cmd == "up":
+    x = servo.getPosition(1) + 800
     servo.setTarget(1,x)
 
 finally:
