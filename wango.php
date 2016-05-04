@@ -1,49 +1,20 @@
 <?php
-if ($_GET["cmd"]=="left") {
-  exec("sudo python moveleft.py");
+// channel 1 is for the DC motors
+$movement_cmd_list_1 = array("left","nudgeleft","right","nudgeright","forward","back","stop","run");
+// channel 2 is for the Servo motors
+$movement_cmd_list_2 = array("up","down","headleft","headright", "headleftnudge", "headrightnudge","headcenter");
+
+function writeCmd($channel, $cmd) {
+  $myfile = fopen("/etc/ramdisk/cmd".$channel.".txt", "w") or die("skipping cmd file.");
+  fwrite($myfile, $cmd);
+  fclose($myfile);
 }
 
-if ($_GET["cmd"]=="nudgeleft") {
-  exec("sudo python nudgeleft.py");
+if (in_array($_GET["cmd"], $movement_cmd_list_1)) {
+  writeCmd(1,$_GET["cmd"]);
 }
-
-if ($_GET["cmd"]=="right") {
-  exec("sudo python moveright.py");
-}
-if ($_GET["cmd"]=="nudgeright") {
-  exec("sudo python nudgeright.py");
-}
-
-if ($_GET["cmd"]=="forward") {
-  exec("sudo python moveforward.py");
-}
-
-if ($_GET["cmd"]=="back") {
-  exec("sudo python moveback.py");
-}
-
-if ($_GET["cmd"]=="up") {
-  exec("sudo python faceup.py");
-}
-
-if ($_GET["cmd"]=="down") {
-  exec("sudo python facedown.py");
-}
-
-if ($_GET["cmd"]=="headleft") {
-  exec("sudo python faceleft.py");
-}
-
-if ($_GET["cmd"]=="headright") {
-  exec("sudo python faceright.py");
-}
-
-if ($_GET["cmd"]=="headleftnudge") {
-  exec("sudo python faceleftnudge.py");
-}
-
-if ($_GET["cmd"]=="headrightnudge") {
-  exec("sudo python facerightnudge.py");
+if (in_array($_GET["cmd"], $movement_cmd_list_2)) {
+  writeCmd(2,$_GET["cmd"]);
 }
 
 if ($_GET["cmd"]=="faceon") {
@@ -52,19 +23,11 @@ if ($_GET["cmd"]=="faceon") {
 }
 
 if ($_GET["cmd"]=="faceoff") {
-  exec("sudo cp turn_off_face.txt2 turn_off_face.txt");
-}
-
-if ($_GET["cmd"]=="stop") {
-  exec("sudo python stop.py");
-}
-
-if ($_GET["cmd"]=="run") {
-  exec("sudo python run.py");
+  exec("sudo cp turn_off_face.txt2 turn_off_face.txt &");
 }
 
 if ($_GET["cmd"]=="snap") {
-  exec("sudo fswebcam -d v4l2:/dev/video0 -i 0 -r 320x240  --timestamp \"%Y-%m-%d %H:%M:%S\" /mnt/ramdisk/image.jpg");
+  exec("sudo fswebcam -d v4l2:/dev/video0 -i 0 -r 320x240  --timestamp \"%Y-%m-%d %H:%M:%S\" /mnt/ramdisk/image.jpg &");
 }
 
 if ($_GET["cmd"]=="startcam") {
@@ -73,15 +36,15 @@ if ($_GET["cmd"]=="startcam") {
 }
 
 if ($_GET["cmd"]=="stopcam") {
-  exec("sudo rm turn_off_face.txt");
+  exec("sudo rm turn_off_face.txt &");
 }
 
 if ($_GET["cmd"]=="resetcam") {
-  exec("sudo ./resetcam");
+  exec("sudo ./resetcam &");
 }
 
 if ($_GET["cmd"]=="shutdown") {
-  exec("sudo shutdown now");
+  exec("sudo shutdown now &");
 }
 
 if ($_GET["cmd"]=="reboot") {
