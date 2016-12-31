@@ -20,7 +20,7 @@ else:
             time.sleep(0.1)
             cmd = myfile.readline()
             if cmd == 'left':
-                call(["moveleft.py", ""])
+                call(["sudo python moveleft.py", ""])
         
     except:
         myfile.close()
