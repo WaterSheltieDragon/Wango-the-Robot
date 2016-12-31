@@ -322,9 +322,9 @@ if __name__ == '__main__':
 
 					else:
 						if continueleft > 0:
-							CamLeft(100,continueleft)
+							CamLeft(200,continueleft)
 						if continueright > 0:
-							CamRight(100,continueright)
+							CamRight(200,continueright)
 						
 					cnt = cnt + 1
 					if cnt == 10:
