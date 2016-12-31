@@ -1,4 +1,5 @@
 <?php
+//
 // channel 1 is for the DC motors
 $movement_cmd_list_1 = array("left","nudgeleft","right","nudgeright","forward","back","stop","run");
 // channel 2 is for the Servo motors
