@@ -5,7 +5,7 @@ try:
     s.bind( '\0postconnect_gateway_notify_lock') 
     print "done."
     while True:
-      #nothing
+      a = a
       
 except socket.error, e:
     error_code = e.args[0]
