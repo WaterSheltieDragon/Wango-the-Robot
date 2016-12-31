@@ -15,7 +15,7 @@ except socket.error, e:
     
 else:
     try:
-        myfile = open('/etc/ramdisk/cmd1.txt', 'r')
+        myfile = open('/mnt/ramdisk/cmd1.txt', 'r')
         while True:
             time.sleep(0.1)
             cmd = myfile.readline()
