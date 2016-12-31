@@ -312,4 +312,3 @@ if __name__ == '__main__':
 					if cnt == 10:
 						cnt = 0
 						cv2.imwrite("/var/www/html/image.jpg",img_out)
-
