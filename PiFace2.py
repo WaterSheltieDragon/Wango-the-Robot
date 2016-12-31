@@ -16,6 +16,8 @@ _Servo0UL = 8200
 _Servo1LL = 4000
 _Servo0LL = 3000
 
+continueleft = 0
+continueright = 0
 
 face = [0,0,0,0]	# This will hold the array that OpenCV returns when it finds a face: (makes a rectangle)
 Cface = [0,0]		# Center of the face: a point calculated from the above variable
@@ -281,20 +283,28 @@ if __name__ == '__main__':
 						draw_rect(img_out,face,(0,255,0))
 
 						print str(Cface[0]) + "," + str(Cface[1])
+						continueleft = 0
+						continueright = 0
 
 						if Cface[0] > 200:	# The camera is moved diffrent distances and speeds depending on how far away-
 							CamLeft(200,3)	#	from the center of that axis it detects a face
+							continueleft = 3
 						elif Cface[0] > 190:	#
 							CamLeft(100,2)	#
+							continueleft = 2
 						elif Cface[0] > 180:	#
 							CamLeft(50,1)	#
+							continueleft = 1
 
 						if Cface[0] < 120:	# and diffrent dirrections depending on what side of center if finds a face.
 							CamRight(200,3)
+							continueright = 3
 						elif Cface[0] < 130:
 							CamRight(100,2)
+							continueright = 2
 						elif Cface[0] < 140:
 							CamRight(50,1)
+							continueright = 1
 
 						if Cface[1] > 170:	# and moves diffrent servos depending on what axis we are talking about.
 							CamUp(300,1)
@@ -310,6 +320,12 @@ if __name__ == '__main__':
 						elif Cface[1] < 110:
 							CamDown(200,1)
 
+					else:
+						if continueleft > 0:
+							CamLeft(100,continueleft)
+						if continueright > 0:
+							CamRight(100,continueright)
+						
 					cnt = cnt + 1
 					if cnt == 10:
 						cnt = 0
