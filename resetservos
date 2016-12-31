@@ -1,0 +1,6 @@
+#!/bin/bash
+
+bs=`lsusb | grep 1ffb:0089 | cut -c5-7`
+dve=`lsusb | grep 1ffb:0089 | cut -c16-18`
+
+sudo /var/www/html/usbreset /dev/bus/usb/$bs/$dve
