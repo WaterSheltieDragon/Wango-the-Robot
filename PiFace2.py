@@ -312,4 +312,21 @@ if __name__ == '__main__':
 					if cnt == 10:
 						cnt = 0
 						cv2.imwrite("/var/www/html/image.jpg",img_out)
-		else:
+		except:
+			print("Unexpected error:", sys.exc_info()[0])
+			print "Closing servos."
+			Servo0CP.close()
+			Servo1CP.close()
+			Servo0DP.close()
+			Servo1DP.close()
+			Servo0S.close()
+			Servo1S.close()
+			p_p0.terminate()
+			time.sleep(0.1)
+			p_p1.terminate()
+			time.sleep(0.1)
+			p_p0.join()
+			p_p1.join()
+			webcam.release()
+			servo.close()
+			print "Completed normal shutdown of PiFace."
