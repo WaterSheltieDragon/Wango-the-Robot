@@ -313,7 +313,7 @@ if __name__ == '__main__':
 					cnt = cnt + 1
 					if cnt == 10:
 						cnt = 0
-						cv2.imwrite("/var/www/html/image.jpg",img_out)
+						cv2.imwrite("/mnt/ramdisk/image.jpg",img_out)
 		except:
 			print("Unexpected error:", sys.exc_info()[0])
 			print "Closing servos."
