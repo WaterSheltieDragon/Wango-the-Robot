@@ -41,6 +41,7 @@ if ($_GET["cmd"]=="stopcam") {
 
 if ($_GET["cmd"]=="resetcam") {
   exec("sudo ./resetcam &");
+  exec("sudo ./resetservos &");
 }
 
 if ($_GET["cmd"]=="shutdown") {
