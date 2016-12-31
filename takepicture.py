@@ -21,20 +21,25 @@ except socket.error, e:
 	sys.exit (0)
 	
 else:
-	turn_off_face_fname = "/var/www/html/turn_off_face.txt"
-	done = False
+	try:
+		turn_off_face_fname = "/var/www/html/turn_off_face.txt"
+		done = False
 
-	webcam = cv2.VideoCapture(-1)
-	webcam.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 320)
-	webcam.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 240)
+		webcam = cv2.VideoCapture(-1)
+		webcam.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 320)
+		webcam.set(cv2.cv.CV_CAP_PROP_FRAME_HEIGHT, 240)
 
-	while not done:
+		while not done:
 
-		if not os.path.isfile(turn_off_face_fname):
-			webcam.release()
-			done=True
-			exit()
+			if not os.path.isfile(turn_off_face_fname):
+				webcam.release()
+				done=True
+				exit()
 
-		aframe = webcam.read()[1]
-		cv2.imwrite("/mnt/ramdisk/image.jpg",aframe)
-		time.sleep(0.1)
+			aframe = webcam.read()[1]
+			cv2.imwrite("/mnt/ramdisk/image.jpg",aframe)
+			time.sleep(0.1)
+	finally:
+		webcam.release()
+		exit()
+		
