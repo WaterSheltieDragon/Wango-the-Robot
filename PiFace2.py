@@ -55,7 +55,7 @@ def P0():	# Process 0 controlles servo0
 		if not Servo0S.empty():			# Constantly read read Servo0S in case the main process-
 			_Servo0S = Servo0S.get()	# 	has updated it, the higher the speed value, the shorter-
 			speed = .1 / _Servo0S		# 	the wait between loops will be, so the servo moves faster
-		if not servo.getMovingState():
+		if servo.getMovingState():
 			if _Servo0CP < _Servo0DP:					# if Servo0CP less than Servo0DP
 				_Servo0CP += 10						# incriment Servo0CP up by one
 				Servo0CP.put(_Servo0CP)					# move the servo that little bit
@@ -85,7 +85,7 @@ def P1():	# Process 1 controlles servo 1 using same logic as above
 		if not Servo1S.empty():
 			_Servo1S = Servo1S.get()
 			speed = .1 / _Servo1S
-		if not servo.getMovingState():
+		if servo.getMovingState():
 			if _Servo1CP < _Servo1DP:
 				_Servo1CP += 30
 				Servo1CP.put(_Servo1CP)
