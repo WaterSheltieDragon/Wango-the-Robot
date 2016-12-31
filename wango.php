@@ -5,7 +5,7 @@ $movement_cmd_list_1 = array("left","nudgeleft","right","nudgeright","forward","
 $movement_cmd_list_2 = array("up","down","headleft","headright", "headleftnudge", "headrightnudge","headcenter");
 
 function writeCmd($channel, $cmd) {
-  $myfile = fopen("/etc/ramdisk/cmd".$channel.".txt", "w") or die("skipping cmd file.");
+  $myfile = fopen("/mnt/ramdisk/cmd".$channel.".txt", "w") or die("skipping cmd file.");
   fwrite($myfile, $cmd);
   fclose($myfile);
 }
