@@ -1,3 +1,5 @@
+a = 0
+
 try:
     import socket
     s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
@@ -5,7 +7,7 @@ try:
     s.bind( '\0postconnect_gateway_notify_lock') 
     print "done."
     while True:
-      a = a
+      a = 0
       
 except socket.error, e:
     error_code = e.args[0]
