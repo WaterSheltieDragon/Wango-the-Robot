@@ -1,4 +1,5 @@
 a = 0
+import sys
 
 try:
     import socket
