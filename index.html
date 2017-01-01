@@ -28,7 +28,7 @@ h1,h2 { margin-bottom: 2px; }
 $(document).ready(function () {
 
   $("#driveleft").on("tap",function() {
-    $.get("wango.php?cmd=left");
+    $.get("wango.php?cmd=moveleft");
     $("#driveleft").css("background", "red");
     setInterval(function(){
       $("#driveleft").css("background","#dddddd");
@@ -46,7 +46,7 @@ $(document).ready(function () {
   });
 
   $("#driveright").on("tap",function() {
-    $.get("wango.php?cmd=right");
+    $.get("wango.php?cmd=moveright");
     $("#driveright").css("background", "red");
     setInterval(function(){
       $("#driveright").css("background","#dddddd");
@@ -65,7 +65,7 @@ $(document).ready(function () {
   });
 
   $("#driveforward").on("tap",function() {
-    $.get("wango.php?cmd=forward");
+    $.get("wango.php?cmd=moveforward");
     $("#driveforward").css("background", "red");
     setInterval(function(){
       $("#driveforward").css("background","#dddddd");
@@ -74,7 +74,7 @@ $(document).ready(function () {
   });
 
   $("#driveback").on("tap",function() {
-    $.get("wango.php?cmd=back");
+    $.get("wango.php?cmd=moveback");
     $("#driveback").css("background", "red");
     setInterval(function(){
       $("#driveback").css("background","#dddddd");
@@ -125,7 +125,7 @@ $(document).ready(function () {
   });
 
   $("#up").on("tap",function() {
-    $.get("wango.php?cmd=up");
+    $.get("wango.php?cmd=faceup");
     $("#up").css("background", "red");
     setInterval(function(){
       $("#up").css("background","#dddddd");
@@ -133,7 +133,7 @@ $(document).ready(function () {
   });
 
   $("#down").on("tap",function() {
-    $.get("wango.php?cmd=down");
+    $.get("wango.php?cmd=facedown");
     $("#down").css("background", "red");
     setInterval(function(){
       $("#down").css("background","#dddddd");
@@ -141,7 +141,7 @@ $(document).ready(function () {
   });
 
   $("#headleft").on("tap",function() {
-    $.get("wango.php?cmd=headleft");
+    $.get("wango.php?cmd=faceleft");
     $("#headleft").css("background", "red");
     setInterval(function(){
       $("#headleft").css("background","#dddddd");
@@ -149,7 +149,7 @@ $(document).ready(function () {
   });
 
   $("#headright").on("tap",function() {
-    $.get("wango.php?cmd=headright");
+    $.get("wango.php?cmd=faceright");
     $("#headright").css("background", "red");
     setInterval(function(){
       $("#headright").css("background","#dddddd");
@@ -157,7 +157,7 @@ $(document).ready(function () {
   });
 
   $("#headleftnudge").on("tap",function() {
-    $.get("wango.php?cmd=headleftnudge");
+    $.get("wango.php?cmd=faceleftnudge");
     $("#headleftnudge").css("background", "red");
     setInterval(function(){
       $("#headleftnudge").css("background","#dddddd");
@@ -165,7 +165,7 @@ $(document).ready(function () {
   });
 
   $("#headrightnudge").on("tap",function() {
-    $.get("wango.php?cmd=headrightnudge");
+    $.get("wango.php?cmd=facerightnudge");
     $("#headrightnudge").css("background", "red");
     setInterval(function(){
       $("#headrightnudge").css("background","#dddddd");
