@@ -1,6 +1,6 @@
 <?php
 
-$movement_cmd_list = array("left","nudgeleft","right","nudgeright","forward","back","stop","run", "up","down","headleft","headright", "headleftnudge", "headrightnudge","headcenter");
+$movement_cmd_list = array("moveleft","nudgeleft","moveright","nudgeright","moveforward","moveback","stop","run", "faceup","facedown","faceleft","faceright", "faceleftnudge", "facerightnudge");
 
 function writeCmd($channel) {
   $myfile = fopen("/mnt/ramdisk/cmd-".$channel.".txt", "w") or die("skipping cmd file.");
