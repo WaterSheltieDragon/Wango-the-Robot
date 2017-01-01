@@ -24,4 +24,3 @@ else:
                 if os.path.isfile('/mnt/ramdisk/cmd-' + c + '.txt'):
                     os.remove('/mnt/ramdisk/cmd-' + c + '.txt')
                     call(["sudo python " + c + ".py &", ""])
-        
