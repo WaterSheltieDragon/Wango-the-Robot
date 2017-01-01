@@ -26,5 +26,4 @@ else:
                     call(["sudo python " + c + ".py &", ""])
         
     except:
-        myfile.close()
         
