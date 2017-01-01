@@ -1,5 +1,8 @@
 import sys
 from subprocess import call
+import os.path
+
+cmd_list = ["up","down","headleft","headright", "headleftnudge", "headrightnudge","headcenter","left","nudgeleft","right","nudgeright","forward","back","stop","run"]
 
 try:
     import socket
@@ -15,13 +18,15 @@ except socket.error, e:
     
 else:
     try:
-        myfile = open('/mnt/ramdisk/cmd1.txt', 'r')
         while True:
             time.sleep(0.1)
-            cmd = myfile.readline()
-            if cmd == 'left':
+            if os.path.isfile('/mnt/ramdisk/cmd-left.txt'):
+                os.remove('/mnt/ramdisk/cmd-left.txt')
+                call(["sudo python moveleft.py", ""])
+            if os.path.isfile('/mnt/ramdisk/cmd-nudgeleft.txt'):
+                os.remove('/mnt/ramdisk/cmd-nudgeleft.txt')
                 call(["sudo python moveleft.py", ""])
         
     except:
         myfile.close()
-    
+        
