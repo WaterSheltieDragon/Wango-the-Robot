@@ -20,12 +20,10 @@ else:
     try:
         while True:
             time.sleep(0.1)
-            if os.path.isfile('/mnt/ramdisk/cmd-left.txt'):
-                os.remove('/mnt/ramdisk/cmd-left.txt')
-                call(["sudo python moveleft.py", ""])
-            if os.path.isfile('/mnt/ramdisk/cmd-nudgeleft.txt'):
-                os.remove('/mnt/ramdisk/cmd-nudgeleft.txt')
-                call(["sudo python moveleft.py", ""])
+            for c in cmd_list:
+                if os.path.isfile('/mnt/ramdisk/cmd-' + c + '.txt'):
+                    os.remove('/mnt/ramdisk/cmd-' + c + '.txt')
+                    call(["sudo python " + c + ".py", ""])
         
     except:
         myfile.close()
