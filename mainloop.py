@@ -23,7 +23,7 @@ else:
             for c in cmd_list:
                 if os.path.isfile('/mnt/ramdisk/cmd-' + c + '.txt'):
                     os.remove('/mnt/ramdisk/cmd-' + c + '.txt')
-                    call(["sudo python " + c + ".py", ""])
+                    call(["sudo python " + c + ".py &", ""])
         
     except:
         myfile.close()
