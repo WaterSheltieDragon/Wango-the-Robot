@@ -25,7 +25,7 @@ else:
                 if os.path.isfile('/mnt/ramdisk/cmd-' + c + '.txt'):
                     os.remove('/mnt/ramdisk/cmd-' + c + '.txt')
                     print 'sudo python /var/www/html/' + c + '.py'
-                    call(['sudo python /var/www/html/' + c + '.py'])
+                    call(['sudo', 'python', '/var/www/html/' + c + '.py'])
                     
     except Exception as e:
         exc_type, exc_obj, exc_tb = sys.exc_info()
