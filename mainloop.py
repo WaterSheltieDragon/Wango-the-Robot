@@ -1,6 +1,6 @@
 import sys
 from subprocess import call
-import os.path
+import os
 import time
 
 cmd_list = ["moveleft","nudgeleft","moveright","nudgeright","moveforward","moveback","stop","run", "faceup","facedown","faceleft","faceright", "faceleftnudge", "facerightnudge"]
