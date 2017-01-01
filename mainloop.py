@@ -2,7 +2,7 @@ import sys
 from subprocess import call
 import os.path
 
-cmd_list = ["up","down","headleft","headright", "headleftnudge", "headrightnudge","headcenter","left","nudgeleft","right","nudgeright","forward","back","stop","run"]
+cmd_list = ["moveleft","nudgeleft","moveright","nudgeright","moveforward","moveback","stop","run", "faceup","facedown","faceleft","faceright", "faceleftnudge", "facerightnudge"]
 
 try:
     import socket
