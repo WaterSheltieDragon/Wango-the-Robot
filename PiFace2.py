@@ -173,6 +173,7 @@ if __name__ == '__main__':
 			pygame.init()
 			pygame.mixer.init()
 			pygame.mixer.music.load("hello.mp3")
+			pygame.mixer.music.set_volume(0.1)
 
 			servo.setAccel(1,8)
 			servo.setAccel(0,8)
