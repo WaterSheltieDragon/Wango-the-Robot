@@ -20,6 +20,7 @@ _Servo0LL = 3000
 continueleft = 0
 continueright = 0
 prev_faceFound = False
+faceFound = False
 
 
 face = [0,0,0,0]	# This will hold the array that OpenCV returns when it finds a face: (makes a rectangle)
