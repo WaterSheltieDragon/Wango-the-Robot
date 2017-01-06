@@ -18,6 +18,8 @@ _Servo0LL = 3000
 
 continueleft = 0
 continueright = 0
+prev_faceFound = False
+
 
 face = [0,0,0,0]	# This will hold the array that OpenCV returns when it finds a face: (makes a rectangle)
 Cface = [0,0]		# Center of the face: a point calculated from the above variable
@@ -167,6 +169,9 @@ if __name__ == '__main__':
 	else:
 		try:
 			servo = maestro.Controller()
+			pygame.init()
+			pygame.mixer.init()
+			pygame.mixer.music.load("hello.mp3")
 
 			servo.setAccel(1,8)
 			servo.setAccel(0,8)
@@ -197,6 +202,7 @@ if __name__ == '__main__':
 				
 				time.sleep(0.1)
 				
+				prev_faceFound = faceFound
 				faceFound = False	# This variable is set to true if, on THIS loop a face has already been found
 							# We search for a face three diffrent ways, and if we have found one already-
 							# there is no reason to keep looking.
@@ -271,7 +277,9 @@ if __name__ == '__main__':
 					if not faceFound:		# if no face was found...-
 						lastface = 0		# 	the next loop needs to know
 						face = [0,0,0,0]	# so that it doesn't think the face is still where it was last loop
-
+						
+					if not prev_faceFound and faceFound:
+						pygame.mixer.music.play()
 
 					x,y,w,h = face
 					Cface = [(w/2+x),(h/2+y)]	# we are given an x,y corner point and a width and height, we need the center
