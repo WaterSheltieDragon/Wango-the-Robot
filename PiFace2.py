@@ -37,11 +37,11 @@ Servo0S = Queue()	# Servo zero speed, sent by main and read by subprocess
 Servo1S = Queue()	# Servo one speed, sent by main and read by subprocess
 
 def draw_rect(img, rect, color):
-    #for x1, y1, x2, y2 in rects:
-    x1,y1,w,h = rect
-    x2 = x1+w
-    y2 = y1+h
-    cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)
+	#for x1, y1, x2, y2 in rects:
+	x1,y1,w,h = rect
+	x2 = x1+w
+	y2 = y1+h
+	cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)
 
 
 def P0():	# Process 0 controlles servo0
