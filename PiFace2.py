@@ -5,7 +5,6 @@ import maestro
 import os.path
 import sys
 import os
-import pygame 
 
 turn_off_face_fname = "/var/www/html/turn_off_face.txt"
 
