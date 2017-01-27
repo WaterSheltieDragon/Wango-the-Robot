@@ -183,8 +183,11 @@ if __name__ == '__main__':
 			servo = maestro.Controller()
 			pygame.init()
 			pygame.mixer.init()
+			pygame.mixer.music.load("/var/www/html/beep6.mp3")
+			pygame.mixer.music.set_volume(0.2)
+			pygame.mixer.music.play()
 			pygame.mixer.music.load("/var/www/html/hello.mp3")
-			pygame.mixer.music.set_volume(0.1)
+			pygame.mixer.music.set_volume(0.2)
 
 			servo.setAccel(1,8)
 			servo.setAccel(0,8)
@@ -342,6 +345,7 @@ if __name__ == '__main__':
 							CamDown(200,1)
 
 					else:
+						
 						if continueleft > 0:
 							CamLeft(200,continueleft)
 							if hit_end:
