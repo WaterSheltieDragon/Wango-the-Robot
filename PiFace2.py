@@ -79,7 +79,7 @@ def P0():	# Process 0 controlles servo0
 				if _Servo0CP == _Servo0DP:	        # if all is good,-
 					_Servo0S = 1		        # slow the speed; no need to eat CPU just waiting
 	finally:
-		speed = .1
+		print "p0 servo error"
 			
 
 def P1():	# Process 1 controlles servo 1 using same logic as above
@@ -112,7 +112,7 @@ def P1():	# Process 1 controlles servo 1 using same logic as above
 				if _Servo1CP == _Servo1DP:
 					_Servo1S = 1
 	finally:
-		speed = .1
+		print "p1 servo error"
 
 def CamRight( distance, speed ):		# To move right, we are provided a distance to move and a speed to move.
 	global _Servo0CP			# We Global it so  everyone is on the same page about where the servo is...
@@ -298,23 +298,29 @@ if __name__ == '__main__':
 						continueleft = 0
 						continueright = 0
 
-						if Cface[0] > 210:	# The camera is moved diffrent distances and speeds depending on how far away-
+						if Cface[0] > 220:	# The camera is moved diffrent distances and speeds depending on how far away-
+							print "far right"
 							CamLeft(200,3)	#	from the center of that axis it detects a face
 							continueleft = 3
 						elif Cface[0] > 200:	#
+							print "middle right"
 							CamLeft(50,2)	#
 							continueleft = 2
 						elif Cface[0] > 180:	#
+							print "little right"
 							CamLeft(20,1)	#
 							continueleft = 1
 
-						if Cface[0] < 110:	# and diffrent dirrections depending on what side of center if finds a face.
+						if Cface[0] < 100:	# and diffrent dirrections depending on what side of center if finds a face.
+							print "far left"
 							CamRight(200,3)
 							continueright = 3
 						elif Cface[0] < 120:
+							print "middle left"
 							CamRight(50,2)
 							continueright = 2
 						elif Cface[0] < 140:
+							print "little left"
 							CamRight(20,1)
 							continueright = 1
 
