@@ -84,12 +84,11 @@ class Controller:
         try:
             self.usb.write(cmd)
         except serial.serialutil.SerialException:
+            print "setTarget: resetting serial port"
             self.usb.reset_input_buffer()
             self.usb.reset_output_buffer()
             self.usb.close()
             self.usb = serial.Serial(self.ttyStr)
-            # Command lead-in and device 12 are sent for each Pololu serial commands.
-            self.PololuCmd = chr(0xaa) + chr(0xc)
             
         # Record Target value
         self.Targets[chan] = target
