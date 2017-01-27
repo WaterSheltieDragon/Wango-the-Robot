@@ -125,10 +125,19 @@ class Controller:
     # it is not stalled or slowed.
     def getPosition(self, chan):
         cmd = self.PololuCmd + chr(0x10) + chr(chan)
-        self.usb.write(cmd)
-        lsb = ord(self.usb.read())
-        msb = ord(self.usb.read())
-        return (msb << 8) + lsb
+        try:
+            self.usb.write(cmd)
+            lsb = ord(self.usb.read())
+            msb = ord(self.usb.read())
+            return (msb << 8) + lsb
+        except serial.serialutil.SerialException:
+            print "getMovingState: resetting serial port"
+            self.usb.reset_input_buffer()
+            self.usb.reset_output_buffer()
+            self.usb.close()
+            self.usb = serial.Serial(self.ttyStr)
+            return 0
+        
 
     # Test to see if a servo has reached its target position.  This only provides
     # useful results if the Speed parameter is set slower than the maximum speed of
@@ -146,11 +155,20 @@ class Controller:
     # Acceleration have been set on one or more of the channels. Returns True or False.
     def getMovingState(self):
         cmd = self.PololuCmd + chr(0x13)
-        self.usb.write(cmd)
-        if self.usb.read() == chr(0):
+        try:
+            self.usb.write(cmd)
+            if self.usb.read() == chr(0):
+                return False
+            else:
+                return True
+        except serial.serialutil.SerialException:
+            print "getMovingState: resetting serial port"
+            self.usb.reset_input_buffer()
+            self.usb.reset_output_buffer()
+            self.usb.close()
+            self.usb = serial.Serial(self.ttyStr)
             return False
-        else:
-            return True
+
 
     # Run a Maestro Script subroutine in the currently active script. Scripts can
     # have multiple subroutines, which get numbered sequentially from 0 on up. Code your
