@@ -341,7 +341,7 @@ if __name__ == '__main__':
 					else:
 						
 						if continueleft > 0:
-							CamLeft(200,continueleft*2)
+							CamLeft(200,continueleft)
 							if hit_end:
 								continueleft = 0
 								continueright = 3
@@ -349,7 +349,7 @@ if __name__ == '__main__':
 								bounce = True
 								print "bounce"
 						if continueright > 0:
-							CamRight(200,continueright*2)
+							CamRight(200,continueright)
 							if hit_end:
 								continueleft = 3
 								continueright = 0
