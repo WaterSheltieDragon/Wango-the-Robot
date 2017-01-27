@@ -11,8 +11,8 @@ turn_off_face_fname = "/var/www/html/turn_off_face.txt"
 
 # Upper limit
 _Servo1UL = 8000
-_Servo0UL = 8050	# if the head gets stuck in one spot then it could be that the UL is higher than the physical limit.
-			# 8060 seems to be physical UL on 0.
+_Servo0UL = 8200	# if the head gets stuck in one spot then it could be that the UL is higher than the physical limit.
+			# 8200 seems to be physical UL on 0.
 
 # Lower Limit
 _Servo1LL = 4000
@@ -70,12 +70,16 @@ def P0():	# Process 0 controlles servo0 - left and right
 				print "+"
 				if _Servo0CP < _Servo0DP:					# if Servo0CP less than Servo0DP
 					_Servo0CP += 10	* _Servo0S				# incriment Servo0CP up by one
+					if _Servo0CP > _Servo0UL:
+						_Servo0CP = _Servo0UL
 					Servo0CP.put(_Servo0CP)					# move the servo that little bit
 					servo.setTarget(0,_Servo0CP)	#
 					if not Servo0CP.empty():				# throw away the old Servo0CP value,-
 						trash = Servo0CP.get()				# 	it's no longer relevent
 				if _Servo0CP > _Servo0DP:					# if Servo0CP greater than Servo0DP
 					_Servo0CP -= 10	* _Servo0S				# incriment Servo0CP down by one
+					if _Servo0CP < _Servo0LL:
+						_Servo0CP = _Servo0LL
 					Servo0CP.put(_Servo0CP)					# move the servo that little bit
 					servo.setTarget(0,_Servo0CP)	#
 					if not Servo0CP.empty():				# throw away the old Servo0CP value,-
@@ -105,12 +109,16 @@ def P1():	# Process 1 controlles servo 1 : up and down
 			if not servo.getMovingState() or _Servo1CP == _Servo1LL or _Servo1CP == _Servo1UL:
 				if _Servo1CP < _Servo1DP:
 					_Servo1CP += 10	* _Servo1S
+					if _Servo1CP > _Servo1UL:
+						_Servo1CP = _Servo1UL
 					Servo1CP.put(_Servo1CP)
 					servo.setTarget(1,_Servo1CP)
 					if not Servo1CP.empty():
 						trash = Servo1CP.get()
 				if _Servo1CP > _Servo1DP:
 					_Servo1CP -= 10	* _Servo1S
+					if _Servo1CP < _Servo1LL:
+						_Servo1CP = _Servo1LL
 					Servo1CP.put(_Servo1CP)
 					servo.setTarget(1,_Servo1CP)
 					if not Servo1CP.empty():
