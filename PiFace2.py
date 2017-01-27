@@ -20,6 +20,7 @@ _Servo0LL = 3000
 continueleft = 0
 continueright = 0
 hit_end = False
+bounce = True         
 
 prev_faceFound = False
 faceFound = False
@@ -110,6 +111,8 @@ def P1():	# Process 1 controlles servo 1 using same logic as above
 def CamRight( distance, speed ):		# To move right, we are provided a distance to move and a speed to move.
 	global _Servo0CP			# We Global it so  everyone is on the same page about where the servo is...
 	global hit_end
+	distance = distance * 2
+	speed = speed * 2
 	if not Servo0CP.empty():		# Read it's current position given by the subprocess(if it's avalible)-
 		_Servo0CP = Servo0CP.get()	# 	and set the main process global variable.
 	_Servo0DP = _Servo0CP + distance	# The desired position is the current position + the distance to move.
@@ -125,6 +128,8 @@ def CamRight( distance, speed ):		# To move right, we are provided a distance to
 def CamLeft(distance, speed):			# Same logic as above
 	global _Servo0CP
 	global hit_end
+	distance = distance * 2
+	speed = speed * 2
 	if not Servo0CP.empty():
 		_Servo0CP = Servo0CP.get()
 	_Servo0DP = _Servo0CP - distance
@@ -263,40 +268,12 @@ if __name__ == '__main__':
 								faceFound = True
 								face = f
 
-					if not faceFound:				# if we didnt find a face yet...
-						if lastface == 0 or lastface == 2:	# only attempt it if we didn't find a face last loop or if-
-							aframe = webcam.read()[1]	# 	THIS method was the one who found it last loop
-							aframe = webcam.read()[1]
-							aframe = webcam.read()[1]	# again we grab some frames, things may have gotten stale-
-							aframe = webcam.read()[1]	# since the frontalface search above
-							aframe = webcam.read()[1]
-							pfacer = profileface.detectMultiScale(aframe,1.3,4,(cv2.cv.CV_HAAR_DO_CANNY_PRUNING + cv2.cv.CV_HAAR_FIND_BIGGEST_OBJECT + cv2.cv.CV_HAAR_DO_ROUGH_SEARCH),(80,80))
-							if pfacer != ():		# if we found a profile face...
-								lastface = 2
-								for f in pfacer:
-									faceFound = True
-									face = f
-
-					if not faceFound:				# a final attempt
-						if lastface == 0 or lastface == 3:	# this is another profile face search, because OpenCV can only-
-							aframe = webcam.read()[1]	#	detect right profile faces, if the cam is looking at-
-							aframe = webcam.read()[1]	#	someone from the left, it won't see them. So we just...
-							aframe = webcam.read()[1]
-							aframe = webcam.read()[1]
-							aframe = webcam.read()[1]
-							cv2.flip(aframe,1,aframe)	#	flip the image
-							pfacel = profileface.detectMultiScale(aframe,1.3,4,(cv2.cv.CV_HAAR_DO_CANNY_PRUNING + cv2.cv.CV_HAAR_FIND_BIGGEST_OBJECT + cv2.cv.CV_HAAR_DO_ROUGH_SEARCH),(80,80))
-							if pfacel != ():
-								lastface = 3
-								for f in pfacel:
-									faceFound = True
-									face = f
-
 					if not faceFound:		# if no face was found...-
 						lastface = 0		# 	the next loop needs to know
 						face = [0,0,0,0]	# so that it doesn't think the face is still where it was last loop
 						
-					if not prev_faceFound and faceFound:
+					if not bounce and faceFound:
+						bounce = False
 						pygame.mixer.music.play()
 						while pygame.mixer.music.get_busy(): 
 							pygame.time.Clock().tick(10)
@@ -356,12 +333,14 @@ if __name__ == '__main__':
 								continueleft = 0
 								continueright = 3
 								hit_end = False
+								bounce = True
 						if continueright > 0:
 							CamRight(200,continueright)
 							if hit_end:
 								continueleft = 3
 								continueright = 0
 								hit_end = False
+								bounce = True
 
 						
 					cnt = cnt + 1
