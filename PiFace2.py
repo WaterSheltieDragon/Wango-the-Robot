@@ -99,7 +99,7 @@ def P1():	# Process 1 controlles servo 1 : up and down
 				#speed = .1 / _Servo1S
 			if not servo.getMovingState() or _Servo1CP == _Servo1LL or _Servo1CP == _Servo1UL:
 				if _Servo1CP < _Servo1DP:
-					_Servo1CP += 10	* _Servo0S
+					_Servo1CP += 10	* _Servo1S
 					Servo1CP.put(_Servo1CP)
 					servo.setTarget(1,_Servo1CP)
 					if not Servo1CP.empty():
