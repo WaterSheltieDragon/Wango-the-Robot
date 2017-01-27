@@ -298,21 +298,21 @@ if __name__ == '__main__':
 						continueleft = 0
 						continueright = 0
 
-						if Cface[0] > 200:	# The camera is moved diffrent distances and speeds depending on how far away-
+						if Cface[0] > 210:	# The camera is moved diffrent distances and speeds depending on how far away-
 							CamLeft(200,3)	#	from the center of that axis it detects a face
 							continueleft = 3
-						elif Cface[0] > 190:	#
-							CamLeft(100,2)	#
+						elif Cface[0] > 200:	#
+							CamLeft(50,2)	#
 							continueleft = 2
 						elif Cface[0] > 180:	#
 							CamLeft(20,1)	#
 							continueleft = 1
 
-						if Cface[0] < 120:	# and diffrent dirrections depending on what side of center if finds a face.
+						if Cface[0] < 110:	# and diffrent dirrections depending on what side of center if finds a face.
 							CamRight(200,3)
 							continueright = 3
-						elif Cface[0] < 130:
-							CamRight(100,2)
+						elif Cface[0] < 120:
+							CamRight(50,2)
 							continueright = 2
 						elif Cface[0] < 140:
 							CamRight(20,1)
