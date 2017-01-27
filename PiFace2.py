@@ -224,7 +224,7 @@ if __name__ == '__main__':
 				faceFound = False	# This variable is set to true if, on THIS loop a face has already been found
 							# We search for a face three diffrent ways, and if we have found one already-
 							# there is no reason to keep looking.
-
+				print "."
 				if os.path.isfile(turn_off_face_fname):
 					try:
 						print "Closing servos."
@@ -298,6 +298,8 @@ if __name__ == '__main__':
 						
 					if not prev_faceFound and faceFound:
 						pygame.mixer.music.play()
+						while pygame.mixer.music.get_busy(): 
+							pygame.time.Clock().tick(10)
 
 					x,y,w,h = face
 					Cface = [(w/2+x),(h/2+y)]	# we are given an x,y corner point and a width and height, we need the center
