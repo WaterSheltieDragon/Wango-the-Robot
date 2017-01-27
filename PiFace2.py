@@ -1,7 +1,7 @@
 from multiprocessing import Process, Queue
 import time
 import cv2
-import maestro
+import maestro	# https://github.com/FRC4564/Maestro
 import os.path
 import sys
 import os
@@ -49,12 +49,13 @@ def draw_rect(img, rect, color):
 	cv2.rectangle(img, (x1, y1), (x2, y2), color, 2)
 
 
-def P0():	# Process 0 controlles servo0
+def P0():	# Process 0 controlles servo0 - left and right
+	 # speed is the time between runs.
 	speed = .1		# Here we set some defaults:
 	try:
 		_Servo0CP = servo.getPosition(0)		# by making the current position and desired position unequal,-
 		_Servo0DP = (_Servo0UL - _Servo0LL)/2+_Servo0LL		# 	we can be sure we know where the servo really is. (or will be soon)
-		while True:
+		while _Servo0DP > -9999:
 			time.sleep(speed)
 			if Servo0CP.empty():			# Constantly update Servo0CP in case the main process needs-
 				Servo0CP.put(_Servo0CP)		# 	to read it
@@ -62,16 +63,16 @@ def P0():	# Process 0 controlles servo0
 				_Servo0DP = Servo0DP.get()	#	has updated it
 			if not Servo0S.empty():			# Constantly read read Servo0S in case the main process-
 				_Servo0S = Servo0S.get()	# 	has updated it, the higher the speed value, the shorter-
-				speed = .1 / _Servo0S		# 	the wait between loops will be, so the servo moves faster
-			if not servo.getMovingState() or _Servo0LL == _Servo0LL or _Servo0LL == _Servo0LL:
+				#speed = .1 / _Servo0S		# 	the wait between loops will be, so the servo moves faster
+			if not servo.getMovingState() or _Servo0CP == _Servo0LL or _Servo0CP == _Servo0UL:
 				if _Servo0CP < _Servo0DP:					# if Servo0CP less than Servo0DP
-					_Servo0CP += 10						# incriment Servo0CP up by one
+					_Servo0CP += 10	* _Servo0S				# incriment Servo0CP up by one
 					Servo0CP.put(_Servo0CP)					# move the servo that little bit
 					servo.setTarget(0,_Servo0CP)	#
 					if not Servo0CP.empty():				# throw away the old Servo0CP value,-
 						trash = Servo0CP.get()				# 	it's no longer relevent
 				if _Servo0CP > _Servo0DP:					# if Servo0CP greater than Servo0DP
-					_Servo0CP -= 10						# incriment Servo0CP down by one
+					_Servo0CP -= 10	* _Servo0S				# incriment Servo0CP down by one
 					Servo0CP.put(_Servo0CP)					# move the servo that little bit
 					servo.setTarget(0,_Servo0CP)	#
 					if not Servo0CP.empty():				# throw away the old Servo0CP value,-
@@ -82,12 +83,12 @@ def P0():	# Process 0 controlles servo0
 		print "p0 servo error"
 			
 
-def P1():	# Process 1 controlles servo 1 using same logic as above
+def P1():	# Process 1 controlles servo 1 : up and down
 	speed = .1
 	try:
 		_Servo1CP = servo.getPosition(1)
 		_Servo1DP = (_Servo1UL - _Servo1LL)/2+_Servo1LL
-		while True:
+		while _Servo1DP > -9999:
 			time.sleep(speed)
 			if Servo1CP.empty():
 				Servo1CP.put(_Servo1CP)
@@ -95,16 +96,16 @@ def P1():	# Process 1 controlles servo 1 using same logic as above
 				_Servo1DP = Servo1DP.get()
 			if not Servo1S.empty():
 				_Servo1S = Servo1S.get()
-				speed = .1 / _Servo1S
+				#speed = .1 / _Servo1S
 			if servo.getMovingState() or _Servo1CP == _Servo1LL or _Servo1CP == _Servo1UL:
 				if _Servo1CP < _Servo1DP:
-					_Servo1CP += 30
+					_Servo1CP += 10	* _Servo0S
 					Servo1CP.put(_Servo1CP)
 					servo.setTarget(1,_Servo1CP)
 					if not Servo1CP.empty():
 						trash = Servo1CP.get()
 				if _Servo1CP > _Servo1DP:
-					_Servo1CP -= 30
+					_Servo1CP -= 10	* _Servo0S
 					Servo1CP.put(_Servo1CP)
 					servo.setTarget(1,_Servo1CP)
 					if not Servo1CP.empty():
@@ -239,6 +240,15 @@ if __name__ == '__main__':
 				if os.path.isfile(turn_off_face_fname):
 					try:
 						print "Closing servos."
+						print "-a"
+						Servo0DP.put(-9999)
+						print "-b"
+						Servo1DP.put(-9999)
+						print "-c"
+						p_p0.join()
+						print "-9"
+						p_p1.join()
+						print "-d"
 						Servo0CP.close()
 						print "-1"
 						Servo1CP.close()
@@ -257,9 +267,6 @@ if __name__ == '__main__':
 						p_p1.terminate()
 						print "-8"
 						time.sleep(0.1)
-						p_p0.join()
-						print "-9"
-						p_p1.join()
 						print "-10"
 						webcam.release()
 						print "-11"
@@ -336,18 +343,18 @@ if __name__ == '__main__':
 							continueright = 1
 
 						if Cface[1] > 170:	# and moves diffrent servos depending on what axis we are talking about.
-							CamUp(300,1)
+							CamUp(300,3)
 						elif Cface[1] > 150:
-							CamUp(200,2)
+							CamUp(200,6)
 						elif Cface[1] > 140:
-							CamUp(150,3)
+							CamUp(150,9)
 
 						if Cface[1] < 80:
-							CamDown(400,3)
+							CamDown(400,9)
 						elif Cface[1] < 90:
-							CamDown(300,2)
+							CamDown(300,6)
 						elif Cface[1] < 110:
-							CamDown(150,1)
+							CamDown(150,3)
 
 					else:
 						
@@ -376,6 +383,15 @@ if __name__ == '__main__':
 		except:
 			print("Unexpected error:", sys.exc_info()[0])
 			print "Closing servos."
+			print "-a"
+			Servo0DP.put(-9999)
+			print "-b"
+			Servo1DP.put(-9999)
+			print "-c"
+			p_p0.join()
+			print "-9"
+			p_p1.join()
+			print "-d"
 			Servo0CP.close()
 			Servo1CP.close()
 			Servo0DP.close()
@@ -386,8 +402,6 @@ if __name__ == '__main__':
 			time.sleep(0.1)
 			p_p1.terminate()
 			time.sleep(0.1)
-			p_p0.join()
-			p_p1.join()
 			webcam.release()
 			servo.close()
 			print "Completed normal shutdown of PiFace."
