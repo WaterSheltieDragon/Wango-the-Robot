@@ -65,6 +65,7 @@ def P0():	# Process 0 controlles servo0 - left and right
 				_Servo0S = Servo0S.get()	# 	has updated it, the higher the speed value, the shorter-
 				#speed = .1 / _Servo0S		# 	the wait between loops will be, so the servo moves faster
 			if not servo.getMovingState() or _Servo0CP == _Servo0LL or _Servo0CP == _Servo0UL:
+				print "+"
 				if _Servo0CP < _Servo0DP:					# if Servo0CP less than Servo0DP
 					_Servo0CP += 10	* _Servo0S				# incriment Servo0CP up by one
 					Servo0CP.put(_Servo0CP)					# move the servo that little bit
@@ -79,12 +80,14 @@ def P0():	# Process 0 controlles servo0 - left and right
 						trash = Servo0CP.get()				# 	it's no longer relevent
 				if _Servo0CP == _Servo0DP:	        # if all is good,-
 					_Servo0S = 1		        # slow the speed; no need to eat CPU just waiting
+			else:
+				print "-"
 	finally:
 		print "p0 servo error"
 			
 
 def P1():	# Process 1 controlles servo 1 : up and down
-	speed = .1
+	speed = .2
 	try:
 		_Servo1CP = servo.getPosition(1)
 		_Servo1DP = (_Servo1UL - _Servo1LL)/2+_Servo1LL
