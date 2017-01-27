@@ -285,7 +285,7 @@ if __name__ == '__main__':
 						aframe = webcam.read()[1]	#	the webcam consistantly gets exactly five frames behind-
 						aframe = webcam.read()[1]	#	realtime. So we just grab a frame five times to ensure-
 						aframe = webcam.read()[1]	#	we have the most up-to-date image.
-						fface = frontalface.detectMultiScale(aframe,1.3,4,(cv2.cv.CV_HAAR_DO_CANNY_PRUNING + cv2.cv.CV_HAAR_FIND_BIGGEST_OBJECT + cv2.cv.CV_HAAR_DO_ROUGH_SEARCH),(60,60))
+						fface = frontalface.detectMultiScale(aframe,1.3,4,(cv2.cv.CV_HAAR_DO_CANNY_PRUNING + cv2.cv.CV_HAAR_FIND_BIGGEST_OBJECT + cv2.cv.CV_HAAR_DO_ROUGH_SEARCH),(30,30))
 						if fface != ():			# if we found a frontal face...
 							lastface = 1		# set lastface 1 (so next loop we will only look for a frontface)
 							for f in fface:		# f in fface is an array with a rectangle representing a face
@@ -315,7 +315,7 @@ if __name__ == '__main__':
 						print str(Cface[0]) + "," + str(Cface[1]) + "," + str(w)
 						continueleft = 0
 						continueright = 0
-						movement_scale = w/100.0	# to account for the distance from the face.
+						movement_scale = w/60.0		# to account for the distance from the face.
 										# more distance than more slow movement.
 
 						if Cface[0] > 220:	# The camera is moved diffrent distances and speeds depending on how far away-
