@@ -272,8 +272,9 @@ if __name__ == '__main__':
 						lastface = 0		# 	the next loop needs to know
 						face = [0,0,0,0]	# so that it doesn't think the face is still where it was last loop
 						
-					if not bounce and faceFound:
+					if bounce and faceFound:
 						bounce = False
+						print "Found you."
 						pygame.mixer.music.play()
 						while pygame.mixer.music.get_busy(): 
 							pygame.time.Clock().tick(10)
@@ -298,7 +299,7 @@ if __name__ == '__main__':
 							CamLeft(100,2)	#
 							continueleft = 2
 						elif Cface[0] > 180:	#
-							CamLeft(50,1)	#
+							CamLeft(20,1)	#
 							continueleft = 1
 
 						if Cface[0] < 120:	# and diffrent dirrections depending on what side of center if finds a face.
@@ -308,7 +309,7 @@ if __name__ == '__main__':
 							CamRight(100,2)
 							continueright = 2
 						elif Cface[0] < 140:
-							CamRight(50,1)
+							CamRight(20,1)
 							continueright = 1
 
 						if Cface[1] > 170:	# and moves diffrent servos depending on what axis we are talking about.
@@ -334,6 +335,7 @@ if __name__ == '__main__':
 								continueright = 3
 								hit_end = False
 								bounce = True
+								print "bounce"
 						if continueright > 0:
 							CamRight(200,continueright)
 							if hit_end:
@@ -341,6 +343,7 @@ if __name__ == '__main__':
 								continueright = 0
 								hit_end = False
 								bounce = True
+								print "bounce"
 
 						
 					cnt = cnt + 1
