@@ -3,7 +3,7 @@ import time
 import cv2
 import maestro	# https://github.com/FRC4564/Maestro
 import os.path
-import sys
+import sys, traceback
 import os
 import pygame
 
@@ -387,6 +387,7 @@ if __name__ == '__main__':
 			
 		except:
 			print("Unexpected error:", sys.exc_info()[0])
+			traceback.print_exc(file=sys.stdout)
 			print "Closing servos."
 			print "-a"
 			Servo0DP.put(-9999)
