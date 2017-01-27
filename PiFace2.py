@@ -240,18 +240,29 @@ if __name__ == '__main__':
 					try:
 						print "Closing servos."
 						Servo0CP.close()
+						print "-1"
 						Servo1CP.close()
+						print "-2"
 						Servo0DP.close()
+						print "-3"
 						Servo1DP.close()
+						print "-4"
 						Servo0S.close()
+						print "-5"
 						Servo1S.close()
+						print "-6"
 						p_p0.terminate()
+						print "-7"
 						time.sleep(0.1)
 						p_p1.terminate()
+						print "-8"
 						time.sleep(0.1)
 						p_p0.join()
+						print "-9"
 						p_p1.join()
+						print "-10"
 						webcam.release()
+						print "-11"
 						servo.close()
 						print "Completed normal shutdown of PiFace."
 					finally:
