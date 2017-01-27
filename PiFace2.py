@@ -312,7 +312,7 @@ if __name__ == '__main__':
 
 						draw_rect(img_out,face,(0,255,0))
 
-						print str(Cface[0]) + "," + str(Cface[1] + "," + str(w))
+						print str(Cface[0]) + "," + str(Cface[1]) + "," + str(w)
 						continueleft = 0
 						continueright = 0
 						movement_scale = w/100.0	# to account for the distance from the face.
