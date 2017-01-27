@@ -136,7 +136,7 @@ class Controller:
             self.usb.reset_output_buffer()
             self.usb.close()
             self.usb = serial.Serial(self.ttyStr)
-            return 0
+            return self.Targets[chan]
         
 
     # Test to see if a servo has reached its target position.  This only provides
