@@ -19,6 +19,8 @@ _Servo0LL = 3000
 
 continueleft = 0
 continueright = 0
+hit_end = False
+
 prev_faceFound = False
 faceFound = False
 
@@ -107,22 +109,26 @@ def P1():	# Process 1 controlles servo 1 using same logic as above
 
 def CamRight( distance, speed ):		# To move right, we are provided a distance to move and a speed to move.
 	global _Servo0CP			# We Global it so  everyone is on the same page about where the servo is...
+	global hit_end
 	if not Servo0CP.empty():		# Read it's current position given by the subprocess(if it's avalible)-
 		_Servo0CP = Servo0CP.get()	# 	and set the main process global variable.
 	_Servo0DP = _Servo0CP + distance	# The desired position is the current position + the distance to move.
 	if _Servo0DP > _Servo0UL:		# But if you are told to move further than the servo is built go...
 		_Servo0DP = _Servo0UL		# Only move AS far as the servo is built to go.
+		hit_end = True
 	Servo0DP.put(_Servo0DP)			# Send the new desired position to the subprocess
 	Servo0S.put(speed)			# Send the new speed to the subprocess
 	return;
 
 def CamLeft(distance, speed):			# Same logic as above
 	global _Servo0CP
+	global hit_end
 	if not Servo0CP.empty():
 		_Servo0CP = Servo0CP.get()
 	_Servo0DP = _Servo0CP - distance
 	if _Servo0DP < _Servo0LL:
 		_Servo0DP = _Servo0LL
+		hit_end = True
 	Servo0DP.put(_Servo0DP)
 	Servo0S.put(speed)
 	return;
@@ -334,8 +340,15 @@ if __name__ == '__main__':
 					else:
 						if continueleft > 0:
 							CamLeft(200,continueleft)
+							if hit_left:
+								continueleft = 0
+								continueright = 3
 						if continueright > 0:
 							CamRight(200,continueright)
+							if hit_left:
+								continueleft = 3
+								continueright = 0
+
 						
 					cnt = cnt + 1
 					if cnt == 10:
