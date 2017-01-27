@@ -131,7 +131,7 @@ class Controller:
             msb = ord(self.usb.read())
             return (msb << 8) + lsb
         except serial.serialutil.SerialException:
-            print "getMovingState: resetting serial port"
+            print "getPosition: resetting serial port"
             self.usb.reset_input_buffer()
             self.usb.reset_output_buffer()
             self.usb.close()
@@ -146,6 +146,7 @@ class Controller:
     # channel, then the target can never be reached, so it will appear to allows be
     # moving to the target.  See setRange comment.
     def isMoving(self, chan):
+        print "isMoving target[chan]=" + str(self.Targets[chan]) + "," + str(self.getPosition(chan))
         if self.Targets[chan] > 0:
             if self.getPosition(chan) <> self.Targets[chan]:
                 return True
