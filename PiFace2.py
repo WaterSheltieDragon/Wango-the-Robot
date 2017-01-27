@@ -300,7 +300,7 @@ if __name__ == '__main__':
 
 						if Cface[0] > 220:	# The camera is moved diffrent distances and speeds depending on how far away-
 							print "far right"
-							CamLeft(200,3)	#	from the center of that axis it detects a face
+							CamLeft(100,3)	#	from the center of that axis it detects a face
 							continueleft = 3
 						elif Cface[0] > 200:	#
 							print "middle right"
@@ -313,7 +313,7 @@ if __name__ == '__main__':
 
 						if Cface[0] < 100:	# and diffrent dirrections depending on what side of center if finds a face.
 							print "far left"
-							CamRight(200,3)
+							CamRight(100,3)
 							continueright = 3
 						elif Cface[0] < 120:
 							print "middle left"
@@ -327,16 +327,16 @@ if __name__ == '__main__':
 						if Cface[1] > 170:	# and moves diffrent servos depending on what axis we are talking about.
 							CamUp(300,1)
 						elif Cface[1] > 150:
-							CamUp(300,2)
+							CamUp(200,2)
 						elif Cface[1] > 140:
-							CamUp(200,3)
+							CamUp(150,3)
 
 						if Cface[1] < 80:
 							CamDown(400,3)
 						elif Cface[1] < 90:
 							CamDown(300,2)
 						elif Cface[1] < 110:
-							CamDown(200,1)
+							CamDown(150,1)
 
 					else:
 						
