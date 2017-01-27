@@ -186,6 +186,8 @@ if __name__ == '__main__':
 			pygame.mixer.music.load("/var/www/html/beep6.mp3")
 			pygame.mixer.music.set_volume(0.2)
 			pygame.mixer.music.play()
+			while pygame.mixer.music.get_busy(): 
+				pygame.time.Clock().tick(10)
 			pygame.mixer.music.load("/var/www/html/hello.mp3")
 			pygame.mixer.music.set_volume(0.2)
 
