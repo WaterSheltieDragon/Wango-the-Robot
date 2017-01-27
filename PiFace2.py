@@ -312,49 +312,51 @@ if __name__ == '__main__':
 
 						draw_rect(img_out,face,(0,255,0))
 
-						print str(Cface[0]) + "," + str(Cface[1])
+						print str(Cface[0]) + "," + str(Cface[1] + "," + str(w))
 						continueleft = 0
 						continueright = 0
+						movement_scale = w/100.0	# to account for the distance from the face.
+										# more distance than more slow movement.
 
 						if Cface[0] > 220:	# The camera is moved diffrent distances and speeds depending on how far away-
 							print "far right"
-							CamLeft(100,3)	#	from the center of that axis it detects a face
+							CamLeft(100 * movement_scale,3)	#	from the center of that axis it detects a face
 							continueleft = 3
 						elif Cface[0] > 200:	#
 							print "middle right"
-							CamLeft(50,2)	#
+							CamLeft(50 * movement_scale,2)	#
 							continueleft = 2
 						elif Cface[0] > 180:	#
 							print "little right"
-							CamLeft(20,1)	#
+							CamLeft(20 * movement_scale,1)	#
 							continueleft = 1
 
 						if Cface[0] < 100:	# and diffrent dirrections depending on what side of center if finds a face.
 							print "far left"
-							CamRight(100,3)
+							CamRight(100 * movement_scale,3)
 							continueright = 3
 						elif Cface[0] < 120:
 							print "middle left"
-							CamRight(50,2)
+							CamRight(50 * movement_scale,2)
 							continueright = 2
 						elif Cface[0] < 140:
 							print "little left"
-							CamRight(20,1)
+							CamRight(20 * movement_scale,1)
 							continueright = 1
 
 						if Cface[1] > 170:	# and moves diffrent servos depending on what axis we are talking about.
-							CamUp(300,3)
+							CamUp(200 * movement_scale,3)
 						elif Cface[1] > 150:
-							CamUp(200,6)
+							CamUp(100 * movement_scale,6)
 						elif Cface[1] > 140:
-							CamUp(150,9)
+							CamUp(50 * movement_scale,9)
 
 						if Cface[1] < 80:
-							CamDown(400,9)
+							CamDown(200 * movement_scale,9)
 						elif Cface[1] < 90:
-							CamDown(300,6)
+							CamDown(100 * movement_scale,6)
 						elif Cface[1] < 110:
-							CamDown(150,3)
+							CamDown(50 * movement_scale,3)
 
 					else:
 						
