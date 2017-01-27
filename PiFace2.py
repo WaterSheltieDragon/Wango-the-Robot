@@ -51,62 +51,68 @@ def draw_rect(img, rect, color):
 
 def P0():	# Process 0 controlles servo0
 	speed = .1		# Here we set some defaults:
-	_Servo0CP = servo.getPosition(0)		# by making the current position and desired position unequal,-
-	_Servo0DP = (_Servo0UL - _Servo0LL)/2+_Servo0LL		# 	we can be sure we know where the servo really is. (or will be soon)
-	while True:
-		time.sleep(speed)
-		if Servo0CP.empty():			# Constantly update Servo0CP in case the main process needs-
-			Servo0CP.put(_Servo0CP)		# 	to read it
-		if not Servo0DP.empty():		# Constantly read read Servo0DP in case the main process-
-			_Servo0DP = Servo0DP.get()	#	has updated it
-		if not Servo0S.empty():			# Constantly read read Servo0S in case the main process-
-			_Servo0S = Servo0S.get()	# 	has updated it, the higher the speed value, the shorter-
-			speed = .1 / _Servo0S		# 	the wait between loops will be, so the servo moves faster
-		if not servo.getMovingState() or _Servo0LL == _Servo0LL or _Servo0LL == _Servo0LL:
-			if _Servo0CP < _Servo0DP:					# if Servo0CP less than Servo0DP
-				_Servo0CP += 10						# incriment Servo0CP up by one
-				Servo0CP.put(_Servo0CP)					# move the servo that little bit
-				servo.setTarget(0,_Servo0CP)	#
-				if not Servo0CP.empty():				# throw away the old Servo0CP value,-
-					trash = Servo0CP.get()				# 	it's no longer relevent
-			if _Servo0CP > _Servo0DP:					# if Servo0CP greater than Servo0DP
-				_Servo0CP -= 10						# incriment Servo0CP down by one
-				Servo0CP.put(_Servo0CP)					# move the servo that little bit
-				servo.setTarget(0,_Servo0CP)	#
-				if not Servo0CP.empty():				# throw away the old Servo0CP value,-
-					trash = Servo0CP.get()				# 	it's no longer relevent
-			if _Servo0CP == _Servo0DP:	        # if all is good,-
-				_Servo0S = 1		        # slow the speed; no need to eat CPU just waiting
+	try:
+		_Servo0CP = servo.getPosition(0)		# by making the current position and desired position unequal,-
+		_Servo0DP = (_Servo0UL - _Servo0LL)/2+_Servo0LL		# 	we can be sure we know where the servo really is. (or will be soon)
+		while True:
+			time.sleep(speed)
+			if Servo0CP.empty():			# Constantly update Servo0CP in case the main process needs-
+				Servo0CP.put(_Servo0CP)		# 	to read it
+			if not Servo0DP.empty():		# Constantly read read Servo0DP in case the main process-
+				_Servo0DP = Servo0DP.get()	#	has updated it
+			if not Servo0S.empty():			# Constantly read read Servo0S in case the main process-
+				_Servo0S = Servo0S.get()	# 	has updated it, the higher the speed value, the shorter-
+				speed = .1 / _Servo0S		# 	the wait between loops will be, so the servo moves faster
+			if not servo.getMovingState() or _Servo0LL == _Servo0LL or _Servo0LL == _Servo0LL:
+				if _Servo0CP < _Servo0DP:					# if Servo0CP less than Servo0DP
+					_Servo0CP += 10						# incriment Servo0CP up by one
+					Servo0CP.put(_Servo0CP)					# move the servo that little bit
+					servo.setTarget(0,_Servo0CP)	#
+					if not Servo0CP.empty():				# throw away the old Servo0CP value,-
+						trash = Servo0CP.get()				# 	it's no longer relevent
+				if _Servo0CP > _Servo0DP:					# if Servo0CP greater than Servo0DP
+					_Servo0CP -= 10						# incriment Servo0CP down by one
+					Servo0CP.put(_Servo0CP)					# move the servo that little bit
+					servo.setTarget(0,_Servo0CP)	#
+					if not Servo0CP.empty():				# throw away the old Servo0CP value,-
+						trash = Servo0CP.get()				# 	it's no longer relevent
+				if _Servo0CP == _Servo0DP:	        # if all is good,-
+					_Servo0S = 1		        # slow the speed; no need to eat CPU just waiting
+	finally:
+		speed = .1
 			
 
 def P1():	# Process 1 controlles servo 1 using same logic as above
 	speed = .1
-	_Servo1CP = servo.getPosition(1)
-	_Servo1DP = (_Servo1UL - _Servo1LL)/2+_Servo1LL
-	while True:
-		time.sleep(speed)
-		if Servo1CP.empty():
-			Servo1CP.put(_Servo1CP)
-		if not Servo1DP.empty():
-			_Servo1DP = Servo1DP.get()
-		if not Servo1S.empty():
-			_Servo1S = Servo1S.get()
-			speed = .1 / _Servo1S
-		if servo.getMovingState() or _Servo1CP == _Servo1LL or _Servo1CP == _Servo1UL:
-			if _Servo1CP < _Servo1DP:
-				_Servo1CP += 30
+	try:
+		_Servo1CP = servo.getPosition(1)
+		_Servo1DP = (_Servo1UL - _Servo1LL)/2+_Servo1LL
+		while True:
+			time.sleep(speed)
+			if Servo1CP.empty():
 				Servo1CP.put(_Servo1CP)
-				servo.setTarget(1,_Servo1CP)
-				if not Servo1CP.empty():
-					trash = Servo1CP.get()
-			if _Servo1CP > _Servo1DP:
-				_Servo1CP -= 30
-				Servo1CP.put(_Servo1CP)
-				servo.setTarget(1,_Servo1CP)
-				if not Servo1CP.empty():
-					trash = Servo1CP.get()
-			if _Servo1CP == _Servo1DP:
-				_Servo1S = 1
+			if not Servo1DP.empty():
+				_Servo1DP = Servo1DP.get()
+			if not Servo1S.empty():
+				_Servo1S = Servo1S.get()
+				speed = .1 / _Servo1S
+			if servo.getMovingState() or _Servo1CP == _Servo1LL or _Servo1CP == _Servo1UL:
+				if _Servo1CP < _Servo1DP:
+					_Servo1CP += 30
+					Servo1CP.put(_Servo1CP)
+					servo.setTarget(1,_Servo1CP)
+					if not Servo1CP.empty():
+						trash = Servo1CP.get()
+				if _Servo1CP > _Servo1DP:
+					_Servo1CP -= 30
+					Servo1CP.put(_Servo1CP)
+					servo.setTarget(1,_Servo1CP)
+					if not Servo1CP.empty():
+						trash = Servo1CP.get()
+				if _Servo1CP == _Servo1DP:
+					_Servo1S = 1
+	finally:
+		speed = .1
 
 def CamRight( distance, speed ):		# To move right, we are provided a distance to move and a speed to move.
 	global _Servo0CP			# We Global it so  everyone is on the same page about where the servo is...
@@ -329,7 +335,7 @@ if __name__ == '__main__':
 					else:
 						
 						if continueleft > 0:
-							CamLeft(200,continueleft)
+							CamLeft(200,continueleft*2)
 							if hit_end:
 								continueleft = 0
 								continueright = 3
@@ -337,7 +343,7 @@ if __name__ == '__main__':
 								bounce = True
 								print "bounce"
 						if continueright > 0:
-							CamRight(200,continueright)
+							CamRight(200,continueright*2)
 							if hit_end:
 								continueleft = 3
 								continueright = 0
