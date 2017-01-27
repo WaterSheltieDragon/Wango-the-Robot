@@ -188,7 +188,7 @@ if __name__ == '__main__':
 		error_code = e.args[0]
 		error_string = e.args[1]
 		print "Process already running (%d:%s ). Exiting" % ( error_code, error_string) 
-		sys.exit (0)
+		exit()
 
 	else:
 		try:
@@ -380,6 +380,9 @@ if __name__ == '__main__':
 					if cnt == 10:
 						cnt = 0
 						cv2.imwrite("/mnt/ramdisk/image.jpg",img_out)
+		except SystemExit as e:
+			os._exit(1)
+			break
 		except:
 			print("Unexpected error:", sys.exc_info()[0])
 			print "Closing servos."
