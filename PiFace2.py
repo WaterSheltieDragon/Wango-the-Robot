@@ -11,7 +11,8 @@ turn_off_face_fname = "/var/www/html/turn_off_face.txt"
 
 # Upper limit
 _Servo1UL = 8000
-_Servo0UL = 8200
+_Servo0UL = 8050	# if the head gets stuck in one spot then it could be that the UL is higher than the physical limit.
+			# 8060 seems to be physical UL on 0.
 
 # Lower Limit
 _Servo1LL = 4000
