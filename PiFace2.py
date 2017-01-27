@@ -64,7 +64,8 @@ def P0():	# Process 0 controlles servo0 - left and right
 			if not Servo0S.empty():			# Constantly read read Servo0S in case the main process-
 				_Servo0S = Servo0S.get()	# 	has updated it, the higher the speed value, the shorter-
 				#speed = .1 / _Servo0S		# 	the wait between loops will be, so the servo moves faster
-			if not servo.getMovingState() or _Servo0CP == _Servo0LL or _Servo0CP == _Servo0UL:
+			moving = servo.getMovingState()
+			if not moving or _Servo0CP == _Servo0LL or _Servo0CP == _Servo0UL:
 				print "+"
 				if _Servo0CP < _Servo0DP:					# if Servo0CP less than Servo0DP
 					_Servo0CP += 10	* _Servo0S				# incriment Servo0CP up by one
@@ -81,7 +82,7 @@ def P0():	# Process 0 controlles servo0 - left and right
 				if _Servo0CP == _Servo0DP:	        # if all is good,-
 					_Servo0S = 1		        # slow the speed; no need to eat CPU just waiting
 			else:
-				print "-"
+				print "-" + str(moving) + "," + str(_Servo0CP) + "," + str(_Servo0LL) + "," + str(_Servo0CP) + "," + str(_Servo0UL)
 	finally:
 		print "p0 servo error"
 			
