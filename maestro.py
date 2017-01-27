@@ -146,7 +146,6 @@ class Controller:
     # channel, then the target can never be reached, so it will appear to allows be
     # moving to the target.  See setRange comment.
     def isMoving(self, chan):
-        print "isMoving target[chan]=" + str(self.Targets[chan]) + "," + str(self.getPosition(chan))
         if self.Targets[chan] > 0:
             if self.getPosition(chan) <> self.Targets[chan]:
                 return True
@@ -155,10 +154,13 @@ class Controller:
     # Have all servo outputs reached their targets? This is useful only if Speed and/or
     # Acceleration have been set on one or more of the channels. Returns True or False.
     def getMovingState(self):
-        cmd = self.PololuCmd + chr(0x13)
+        print "getMovingState"
         try:
+            cmd = self.PololuCmd + chr(0x13)
             self.usb.write(cmd)
-            if self.usb.read() == chr(0):
+            r = self.usb.read()
+            print "----------------------" + str(r)
+            if r == chr(0):
                 return False
             else:
                 return True
