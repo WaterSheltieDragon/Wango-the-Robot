@@ -207,6 +207,7 @@ if __name__ == '__main__':
 
 	else:
 		try:
+			os.nice(15)
 			servo = maestro.Controller()
 			pygame.init()
 			pygame.mixer.init()
