@@ -349,6 +349,7 @@ if __name__ == '__main__':
 						elif Cface[0] > 170:
 							print "nudge right"
 							CamLeft(1 * movement_scale,1)
+							continueleft = 1
 
 						if Cface[0] < 100:	# and diffrent dirrections depending on what side of center if finds a face.
 							print "far left"
@@ -365,20 +366,21 @@ if __name__ == '__main__':
 						elif Cface[0] < 150:
 							print "nudge left"
 							CamRight(1 * movement_scale,1)
+							continueright = 1
 
 						if Cface[1] > 170:	# and moves diffrent servos depending on what axis we are talking about.
 							CamUp(200 * movement_scale,3)
 						elif Cface[1] > 150:
 							CamUp(100 * movement_scale,6)
-						elif Cface[1] > 140:
-							CamUp(50 * movement_scale,9)
+						elif Cface[1] > 130:
+							CamUp(20 * movement_scale,9)
 
 						if Cface[1] < 80:
 							CamDown(200 * movement_scale,9)
 						elif Cface[1] < 90:
 							CamDown(100 * movement_scale,6)
 						elif Cface[1] < 110:
-							CamDown(50 * movement_scale,3)
+							CamDown(20 * movement_scale,3)
 
 					else:
 						
