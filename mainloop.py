@@ -5,6 +5,8 @@ import time
 
 cmd_list = ["moveleft","nudgeleft","moveright","nudgeright","moveforward","moveback","stop","run", "faceup","facedown","faceleft","faceright", "faceleftnudge", "facerightnudge"]
 
+os.nice(5)
+
 try:
     import socket
     s = socket.socket(socket.AF_UNIX, socket.SOCK_STREAM)
