@@ -12,7 +12,7 @@ turn_off_face_fname = "/var/www/html/turn_off_face.txt"
 # Upper limit
 _Servo1UL = 8000
 _Servo0UL = 8000	# if the head gets stuck in one spot then it could be that the UL is higher than the physical limit.
-			# 8000 seems to be physical UL on 0.
+			# 8000 seems to be physical UL on 0 and 1.
 
 # Lower Limit
 _Servo1LL = 4000
@@ -67,7 +67,6 @@ def P0():	# Process 0 controlles servo0 - left and right
 				#speed = .1 / _Servo0S		# 	the wait between loops will be, so the servo moves faster
 			moving = servo.getMovingState()
 			if not moving or _Servo0CP == _Servo0LL or _Servo0CP == _Servo0UL:
-				print "+"
 				if _Servo0CP < _Servo0DP:					# if Servo0CP less than Servo0DP
 					_Servo0CP += 10	* _Servo0S				# incriment Servo0CP up by one
 					if _Servo0CP > _Servo0UL:
@@ -87,7 +86,7 @@ def P0():	# Process 0 controlles servo0 - left and right
 				if _Servo0CP == _Servo0DP:	        # if all is good,-
 					_Servo0S = 1		        # slow the speed; no need to eat CPU just waiting
 			else:
-				print "-" + str(moving) + "," + str(_Servo0CP) + "," + str(_Servo0LL) + "," + str(_Servo0CP) + "," + str(_Servo0UL)
+				return
 	finally:
 		print "p0 servo error"
 			
@@ -165,6 +164,8 @@ def CamLeft(distance, speed):			# Same logic as above
 
 def CamDown(distance, speed):			# Same logic as above
 	global _Servo1CP
+	distance = distance * 2
+	speed = speed * 2
 	if not Servo1CP.empty():
 		_Servo1CP = Servo1CP.get()
 	_Servo1DP = _Servo1CP + distance
@@ -177,6 +178,8 @@ def CamDown(distance, speed):			# Same logic as above
 
 def CamUp(distance, speed):			# Same logic as above
 	global _Servo1CP
+	distance = distance * 2
+	speed = speed * 2
 	if not Servo1CP.empty():
 		_Servo1CP = Servo1CP.get()
 	_Servo1DP = _Servo1CP - distance
