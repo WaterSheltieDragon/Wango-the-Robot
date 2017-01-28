@@ -159,7 +159,7 @@ class Controller:
             cmd = self.PololuCmd + chr(0x13)
             self.usb.write(cmd)
             r = self.usb.read()
-            print "----------------------" + str(ord(r)) + ","+ str(self.getPosition(0))
+            print "----------------------" + str(ord(r)) + ","+ str(self.getPosition(1))
             if r == chr(0):
                 return False
             else:
