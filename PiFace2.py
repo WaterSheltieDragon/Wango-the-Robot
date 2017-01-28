@@ -85,8 +85,7 @@ def P0():	# Process 0 controlles servo0 - left and right
 						trash = Servo0CP.get()				# 	it's no longer relevent
 				if _Servo0CP == _Servo0DP:	        # if all is good,-
 					_Servo0S = 1		        # slow the speed; no need to eat CPU just waiting
-			else:
-				return
+
 	finally:
 		print "p0 servo error"
 			
