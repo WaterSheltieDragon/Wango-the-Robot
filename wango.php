@@ -81,11 +81,11 @@ if ($_GET["cmd"]=="resetcam") {
 }
 
 if ($_GET["cmd"]=="shutdown") {
-  exec("sudo shutdown now");
+  exec("sudo nice -n -1 shutdown now");
 }
 
 if ($_GET["cmd"]=="reboot") {
-  exec("sudo reboot &");
+  exec("sudo nice -n -1 reboot &");
 }
 
 ?>
