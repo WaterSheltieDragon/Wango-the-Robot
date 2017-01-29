@@ -296,11 +296,11 @@ if __name__ == '__main__':
 
 				if not faceFound and not done:
 					if lastface == 0 or lastface == 1:
-						aret, aframe = webcam.read()[1]	# there seems to be an issue in OpenCV or V4L or my webcam-
-						aret, aframe = webcam.read()[1]	# 	driver, I'm not sure which, but if you wait too long,
-						aret, aframe = webcam.read()[1]	#	the webcam consistantly gets exactly five frames behind-
-						aret, aframe = webcam.read()[1]	#	realtime. So we just grab a frame five times to ensure-
-						aret, aframe = webcam.read()[1]	#	we have the most up-to-date image.
+						aret, aframe = webcam.read()	# there seems to be an issue in OpenCV or V4L or my webcam-
+						aret, aframe = webcam.read()	# 	driver, I'm not sure which, but if you wait too long,
+						aret, aframe = webcam.read()	#	the webcam consistantly gets exactly five frames behind-
+						aret, aframe = webcam.read()	#	realtime. So we just grab a frame five times to ensure-
+						aret, aframe = webcam.read()	#	we have the most up-to-date image.
 						if not aret: 
 							webcam = cv2.VideoCapture(-1)
 							webcam.set(cv2.cv.CV_CAP_PROP_FRAME_WIDTH, 320)
