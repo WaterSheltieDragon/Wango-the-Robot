@@ -413,7 +413,7 @@ if __name__ == '__main__':
 								hit_end = False
 								bounce = True
 								bounce_count += 1
-								print "bounce"
+								print "bounce " + str(bounce_count)
 						if continueright > 0:
 							CamRight(200,continueright)
 							if hit_end:
@@ -422,7 +422,7 @@ if __name__ == '__main__':
 								hit_end = False
 								bounce = True
 								bounce_count += 1
-								print "bounce"
+								print "bounce " + str(bounce_count)
 
 						
 					cnt = cnt + 1
