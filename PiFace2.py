@@ -24,6 +24,7 @@ continueright = 0
 hit_end = False
 bounce = True
 bounce_count = 0
+bounce_coumt_goal = randomt.randint(5,9)
 
 prev_faceFound = False
 faceFound = False
@@ -330,7 +331,8 @@ if __name__ == '__main__':
 						while pygame.mixer.music.get_busy(): 
 							pygame.time.Clock().tick(10)
 							
-					if bounce and bounce_count == random.randint(5,9):
+					if bounce and bounce_count == bounce_coumt_goal:
+						bounce_coumt_goal = random.randint(5,9)
 						bounce_count = 0
 						print "Bored."
 						pygame.mixer.music.load("/var/www/html/beep7.mp3")
