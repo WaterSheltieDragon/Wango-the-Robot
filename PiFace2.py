@@ -412,7 +412,7 @@ if __name__ == '__main__':
 
 						
 					cnt = cnt + 1
-					if cnt == 10:
+					if cnt == 10 or prev_faceFound != faceFound:
 						cnt = 0
 						cv2.imwrite("/mnt/ramdisk/image.jpg",img_out)
 		except SystemExit as e:
