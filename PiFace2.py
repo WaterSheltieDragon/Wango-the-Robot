@@ -52,7 +52,7 @@ def draw_rect(img, rect, color):
 
 def P0():	# Process 0 controlles servo0 - left and right
 	 # speed is the time between runs.
-	speed = .1		# Here we set some defaults:
+	speed = .01		# Here we set some defaults:
 	try:
 		_Servo0CP = servo.getPosition(0)		# by making the current position and desired position unequal,-
 		_Servo0DP = (_Servo0UL - _Servo0LL)/2+_Servo0LL		# 	we can be sure we know where the servo really is. (or will be soon)
