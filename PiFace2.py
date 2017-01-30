@@ -21,7 +21,8 @@ _Servo0LL = 3000
 continueleft = 3	# start with looking around.
 continueright = 0
 hit_end = False
-bounce = True         
+bounce = True
+bounce_count = 0
 
 prev_faceFound = False
 faceFound = False
@@ -216,7 +217,6 @@ if __name__ == '__main__':
 			pygame.mixer.music.play()
 			while pygame.mixer.music.get_busy(): 
 				pygame.time.Clock().tick(10)
-			pygame.mixer.music.load("/var/www/html/hello.mp3")
 			pygame.mixer.music.set_volume(0.5)
 
 			servo.setAccel(1,8)
@@ -324,6 +324,14 @@ if __name__ == '__main__':
 					if bounce and faceFound:
 						bounce = False
 						print "Found you."
+						pygame.mixer.music.load("/var/www/html/hello.mp3")
+						pygame.mixer.music.play()
+						while pygame.mixer.music.get_busy(): 
+							pygame.time.Clock().tick(10)
+							
+					if bounce and bounce_count == random.randint(5,9):
+						print "Bored."
+						pygame.mixer.music.load("/var/www/html/beep7.mp3")
 						pygame.mixer.music.play()
 						while pygame.mixer.music.get_busy(): 
 							pygame.time.Clock().tick(10)
@@ -400,6 +408,7 @@ if __name__ == '__main__':
 								continueright = 3
 								hit_end = False
 								bounce = True
+								bounce_count++
 								print "bounce"
 						if continueright > 0:
 							CamRight(200,continueright)
@@ -408,6 +417,7 @@ if __name__ == '__main__':
 								continueright = 0
 								hit_end = False
 								bounce = True
+								bounce_count++
 								print "bounce"
 
 						
