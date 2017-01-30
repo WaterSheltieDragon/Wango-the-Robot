@@ -408,7 +408,7 @@ if __name__ == '__main__':
 								continueright = 3
 								hit_end = False
 								bounce = True
-								bounce_count++
+								bounce_count += 1
 								print "bounce"
 						if continueright > 0:
 							CamRight(200,continueright)
@@ -417,7 +417,7 @@ if __name__ == '__main__':
 								continueright = 0
 								hit_end = False
 								bounce = True
-								bounce_count++
+								bounce_count += 1
 								print "bounce"
 
 						
