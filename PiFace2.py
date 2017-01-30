@@ -18,7 +18,7 @@ _Servo0UL = 8000	# if the head gets stuck in one spot then it could be that the 
 _Servo1LL = 4000
 _Servo0LL = 3000
 
-continueleft = 0
+continueleft = 3	# start with looking around.
 continueright = 0
 hit_end = False
 bounce = True         
@@ -256,6 +256,7 @@ if __name__ == '__main__':
 				if os.path.isfile(turn_off_face_fname):
 					try:
 						print "Closing servos."
+						os.remove(turn_off_face_fname)
 						print "-a"
 						Servo0DP.put(-9999)
 						print "-b"
@@ -420,6 +421,7 @@ if __name__ == '__main__':
 		except:
 			print("Unexpected error:", sys.exc_info()[0])
 			traceback.print_exc(file=sys.stdout)
+			os.remove(turn_off_face_fname)
 			print "Closing servos."
 			print "-a"
 			Servo0DP.put(-9999)
