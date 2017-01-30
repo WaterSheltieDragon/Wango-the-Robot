@@ -24,7 +24,7 @@ continueright = 0
 hit_end = False
 bounce = True
 bounce_count = 0
-bounce_coumt_goal = randomt.randint(5,9)
+bounce_coumt_goal = random.randint(5,9)
 
 prev_faceFound = False
 faceFound = False
