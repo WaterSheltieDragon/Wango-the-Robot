@@ -331,6 +331,7 @@ if __name__ == '__main__':
 							pygame.time.Clock().tick(10)
 							
 					if bounce and bounce_count == random.randint(5,9):
+						bounce_count = 0
 						print "Bored."
 						pygame.mixer.music.load("/var/www/html/beep7.mp3")
 						pygame.mixer.music.play()
