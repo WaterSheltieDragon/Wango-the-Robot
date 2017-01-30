@@ -6,6 +6,7 @@ import os.path
 import sys, traceback
 import os
 import pygame
+import random
 
 turn_off_face_fname = "/var/www/html/turn_off_face.txt"
 
