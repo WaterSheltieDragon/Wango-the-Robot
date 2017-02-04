@@ -215,11 +215,11 @@ if __name__ == '__main__':
 			pygame.init()
 			pygame.mixer.init()
 			pygame.mixer.music.load("/var/www/html/beep6.mp3")
-			pygame.mixer.music.set_volume(0.5)
+			pygame.mixer.music.set_volume(1)
 			pygame.mixer.music.play()
 			while pygame.mixer.music.get_busy(): 
 				pygame.time.Clock().tick(10)
-			pygame.mixer.music.set_volume(0.5)
+			pygame.mixer.music.set_volume(1)
 
 			servo.setAccel(1,8)
 			servo.setAccel(0,8)
